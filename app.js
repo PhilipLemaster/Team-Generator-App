@@ -56,9 +56,9 @@ function addQs() {
             
             else if (response.add === 'No') {
                 console.log('Rendering and writing HTML file..')
-                console.log(employees)
-                // let content = render(employees);
-                // fs.writeFile('team.html', content);
+                // console.log(employees)
+                let content = render(employees);
+                fs.writeFile(outputPath, content);
             }
         })
 }
