@@ -56,8 +56,9 @@ function addQs() {
             
             else if (response.add === 'No') {
                 console.log('Rendering and writing HTML file..')
-                let content = render(employees);
-                fs.writeFile('team.html', content);
+                console.log(employees)
+                // let content = render(employees);
+                // fs.writeFile('team.html', content);
             }
         })
 }
@@ -110,6 +111,11 @@ function engineerQs() {
             },
             {
                 type: 'input',
+                message: "What is the engineer's work ID?",
+                name: 'id',
+            },
+            {
+                type: 'input',
                 message: "What is the engineer's Github username?",
                 name: 'github',
             },
@@ -134,6 +140,11 @@ function internQs() {
                 type: 'input',
                 message: "What is the intern's email?",
                 name: 'email',
+            },
+            {
+                type: 'input',
+                message: "What is the intern's work ID?",
+                name: 'id',
             },
             {
                 type: 'input',
