@@ -36,7 +36,8 @@ function createTeam(teamize) {
     
 }
 
-function managerQs() {
+function managerQs() { 
+
     inquirer
         .prompt ([
             {
@@ -55,6 +56,11 @@ function managerQs() {
                 name: 'office',
             },
         ])
+
+        .then(function(response) {
+            var manager = new Manager(response.name, );
+            manager.
+        })
 }
 
 function engineerQs() {
