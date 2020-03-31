@@ -9,14 +9,16 @@ const OUTPUT_DIR = path.resolve(__dirname, 'output');
 const outputPath = path.join(OUTPUT_DIR, 'team.html');
 const render = require('./lib/htmlRenderer');
 
+const employees = [];
+
 createTeam();
 
-function createTeam(teamize) {
+function createTeam() {
     inquirer
         .prompt ([
             {
                 type: 'list',
-                message: 'What team member are you accounting for?',
+                message: 'What team member would you like to add?',
                 choices: ['Manager', 'Engineer', 'Intern'],
                 name: 'type'
             }
@@ -36,6 +38,30 @@ function createTeam(teamize) {
     
 }
 
+function addQs() {
+    inquirer
+        .prompt ([
+            {
+                type: 'list',
+                message: 'Would you like to add another team member?',
+                choices: ['Yes', 'No'],
+                name: 'add'
+            }
+        ])
+
+        .then(function(response) {
+            if (response.add === 'Yes') {
+                createTeam();
+            }
+            
+            else if (response.add === 'No') {
+                console.log('Rendering and writing HTML file..')
+                let content = render(employees);
+                fs.writeFile('team.html', content);
+            }
+        })
+}
+
 function managerQs() { 
 
     inquirer
@@ -52,14 +78,20 @@ function managerQs() {
             },
             {
                 type: 'input',
+                message: "What is the manager's work ID?",
+                name: 'id',
+            },
+            {
+                type: 'input',
                 message: "What is the manager's office number?",
                 name: 'office',
             },
         ])
 
         .then(function(response) {
-            var manager = new Manager(response.name, );
-            manager.
+            var manager = new Manager(response.name, response.id, response.email, response.office);
+            employees.push(manager);
+            addQs();
         })
 }
 
@@ -82,6 +114,12 @@ function engineerQs() {
                 name: 'github',
             },
         ])
+
+        .then(function(response) {
+            var engineer = new Engineer(response.name, response.id, response.email, response.github);
+            employees.push(engineer);
+            addQs();
+        })    
 }
 
 function internQs() {
@@ -103,4 +141,10 @@ function internQs() {
                 name: 'school',
             },
         ])
+
+        .then(function(response) {
+            var intern = new Intern(response.name, response.id, response.email, response.school);
+            employees.push(intern);
+            addQs();
+        })    
 }
