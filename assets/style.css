@@ -1,0 +1,23 @@
+.jumbotron {
+    background-image: url(jumbo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+h1 {
+    font-size: 99px;
+}
+
+.card {
+    min-width: min-content;
+}
+
+h1, .card-header {
+    font-family: 'Kanit', sans-serif;
+    color: black;
+}
+
+h1, .card-body {
+    font-family: 'Ubuntu Condensed', sans-serif;
+}
