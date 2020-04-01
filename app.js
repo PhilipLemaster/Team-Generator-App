@@ -58,7 +58,10 @@ function addQs() {
                 console.log('Rendering and writing HTML file..')
                 // console.log(employees)
                 let content = render(employees);
-                fs.writeFile(outputPath, content);
+                fs.writeFile(outputPath, content, (err) => {
+                    if (err) throw err;
+                    console.log('HTML has been created!!');
+                  });
             }
         })
 }
